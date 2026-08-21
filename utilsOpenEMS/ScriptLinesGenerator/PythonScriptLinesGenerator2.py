@@ -1634,7 +1634,8 @@ class PythonScriptLinesGenerator2(CommonScriptLinesGenerator):
         genScript += "\tos.mkdir(Sim_Path)\n"
         genScript += "CSX.Write2XML(CSX_file)\n"
         genScript += "from CSXCAD import AppCSXCAD_BIN\n"
-        genScript += "os.system(AppCSXCAD_BIN + ' \"{}\"'.format(CSX_file))\n"
+        genScript += "import subprocess\n"
+        genScript += "subprocess.run([AppCSXCAD_BIN + '.exe', CSX_file])  # blocks until AppCSXCAD window is closed\n"
         genScript += "\n"
         genScript += "FDTD.Run(Sim_Path, verbose=3, cleanup=True, setup_only=setup_only, debug_pec=debug_pec)\n"
 
